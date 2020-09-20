@@ -1,0 +1,127 @@
+﻿@using PhotoBoom.Models  
+  
+@model PhotoBoom.Models.PhotoViewModel  
+  
+@{  
+    ViewBag.Title = "PhotoBoom";  
+}  
+  
+  
+<div class="row">  
+    <div class="panel-heading">  
+        <div class="col-md-8">  
+            <h3>  
+                <i class="fa fa-file-text-o"></i>  
+                <span>PhotoBoom</span>  
+            </h3>  
+        </div>  
+    </div>  
+</div>  
+  
+<br/>  
+  
+<div class="row">  
+    <div class="col-md-6 col-md-push-2">  
+        <section>  
+            @using (Html.BeginForm("Index", "Gallery", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", role = "form" }))  
+            {  
+                @Html.AntiForgeryToken()  
+  
+                <div class="well bs-component">  
+                    <br />  
+  
+                    <div class="row">  
+                        <div class="col-md-12">  
+                            <div class="col-md-8 col-md-push-2">  
+                                <div class="input-group">  
+                                    <span class="input-group-btn">  
+                                        <span class="btn btn-default btn-file">  
+                                            Browse…  
+                                            @Html.TextBoxFor(m => m.FileAttach, new { type = "file", placeholder = Html.DisplayNameFor(m => m.FileAttach), @class = "form-control" })  
+                                        </span>  
+                                    </span>  
+                                    <input type="text" class="form-control" readonly>  
+                                </div>  
+                                @Html.ValidationMessageFor(m => m.FileAttach, "", new { @class = "text-danger custom-danger" })  
+                            </div>  
+                        </div>  
+                    </div>  
+  
+                    <div class="form-group">  
+                        <div class="col-md-12">  
+                        </div>  
+                    </div>  
+  
+                    <div class="form-group">  
+                        <div class="col-md-offset-5 col-md-10">  
+                            <input type="submit" class="btn btn-danger" value="Upload" />  
+                        </div>  
+                    </div>  
+                </div>  
+            }  
+        </section>  
+    </div>  
+</div>  
+  
+<hr />  
+  
+<div class="row">  
+    <div class="col-md-offset-4 col-md-8">  
+        <h3>List of Imagess </h3>  
+    </div>  
+</div>  
+  
+<hr />  
+  
+@if (Model != null && Model.PhotoList != null &&  
+     Model.PhotoList.Count() > 0)  
+{  
+    <div class="row">  
+        <div class="col-md-offset-1 col-md-8">  
+            <section>  
+                <table class="table table-bordered table-striped">  
+                    <thead>  
+                        <tr>  
+                            <th style="text-align: center;">Sr.</th>  
+                            <th style="text-align: center;">Image Name</th>  
+                            <th style="text-align: center;"></th>  
+                        </tr>  
+                    </thead>  
+  
+                    <tbody>  
+                        @for (int i = 0; i < Model.PhotoList.Count(); i++)  
+                        {  
+                            <tr>  
+                                <td style="text-align: center;">@(i + 1)</td>  
+  
+                                <td style="text-align: center;">  
+                                    <div class="input-group" style="height:40px;">  
+                                        <i class="fa fa-2x fa-paperclip text-navy"></i>  
+                                        <a class="download-file1" href="@Url.Action("DownloadFile", "Gallery", new { fileId = @Model.PhotoList.ElementAt(i).Id })" target="_blank">  
+                                            @Model.PhotoList.ElementAt(i).FileName  
+                                        </a>  
+                                    </div>  
+                                </td>  
+  
+                                <td style="text-align: center;">  
+                                    <div>  
+                                        <img src="@Url.Action("DownloadFile", "Gallery", new { fileId = @Model.PhotoList.ElementAt(i).Id })" width="100" height="100" />  
+                                    </div>  
+                                </td>  
+                            </tr>  
+                        }  
+                    </tbody>  
+                </table>  
+            </section>  
+        </div>  
+    </div>  
+}  
+  
+@section Scripts  
+{  
+    @*Scripts*@  
+    @* @Scripts.Render("~/bundles/bootstrap-file")   *@
+  
+    @*Styles*@  
+    @* @Styles.Render("~/Content/Bootstrap-file/css")   *@
+} 
