@@ -28,7 +28,7 @@ namespace PhotoBoom.Services
             throw new NotImplementedException();
         }
 
-        public Photo GetPhoto(int id)
+        public Photo GetPhoto(ObjectId id)
         {
             FilterDefinition<Photo> filter = Builders<Photo>.Filter.Eq("_id", id);
 

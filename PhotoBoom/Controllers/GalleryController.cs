@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MongoDB.Bson;
 using PhotoBoom.Entities;
 using PhotoBoom.Models;
 using PhotoBoom.Services;
@@ -130,7 +131,7 @@ namespace PhotoBoom.Controllers
             return View();  
         }  
     
-        public ActionResult DownloadFile(int fileId)  
+        public ActionResult DownloadFile(ObjectId fileId)  
         {  
             // Model binding.  
             PhotoViewModel model = new PhotoViewModel { FileAttach = null, PhotoList = new List<Photo>() };  
