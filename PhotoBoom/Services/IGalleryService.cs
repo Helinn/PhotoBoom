@@ -12,7 +12,7 @@ namespace PhotoBoom.Services
 
         Photo GetPhotoByFileName(string filename);
 
-        Photo GetPhoto(ObjectId id);
+        Photo GetPhoto(string id);
 
     }
 }

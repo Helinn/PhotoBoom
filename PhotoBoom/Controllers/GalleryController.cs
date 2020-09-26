@@ -131,26 +131,15 @@ namespace PhotoBoom.Controllers
             return View();  
         }  
     
-        public ActionResult DownloadFile(ObjectId fileId)  
+        public ActionResult DownloadFile(string fileId)  
         {  
             // Model binding.  
             PhotoViewModel model = new PhotoViewModel { FileAttach = null, PhotoList = new List<Photo>() };  
-  
-            try  
-            {  
-                
-                var fileInfo = galleryService.GetPhoto(fileId);
-                // Info.  
-                return this.GetFile(fileInfo.PictureDataAsString, model.FileAttach.ContentType);  
-            }  
-            catch (Exception ex)  
-            {  
-                // Info  
-                Console.Write(ex);  
-            }  
-  
+
+            var fileInfo = galleryService.GetPhoto(fileId);
             // Info.  
-            return this.View(model);  
+            return this.GetFile(fileInfo.PictureDataAsString, "image/png");  
+
         } 
 
         private FileResult GetFile(string fileContent, string fileContentType)  

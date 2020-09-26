@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MongoDB.Bson;
 using Moq;
 using NUnit.Framework;
 using PhotoBoom.Entities;
@@ -15,7 +16,7 @@ namespace PhotoBoomTest
         {
 
             _PhotoList = new List<Photo>(){
-                new Photo() { Id = 0 , FileName = "test.png", PictureDataAsString = ""}
+                new Photo() { Id =  "123", FileName = "test.png", PictureDataAsString = ""}
             };
         }
  

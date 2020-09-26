@@ -28,9 +28,10 @@ namespace PhotoBoom.Services
             throw new NotImplementedException();
         }
 
-        public Photo GetPhoto(ObjectId id)
+        public Photo GetPhoto(string id)
         {
-            FilterDefinition<Photo> filter = Builders<Photo>.Filter.Eq("_id", id);
+            FilterDefinition<Photo> filter = Builders<Photo>.Filter.Eq("Id", id);
+            //return _dbCollection.Find<ShoppingCart>(item => item.ProductId.Equals(productId)).SingleOrDefault();        
 
             return  galleryRepository.GetByFilter(filter).Result.FirstOrDefault();
         }

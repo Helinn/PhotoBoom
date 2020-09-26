@@ -37,8 +37,8 @@ namespace PhotoBoom.Repositories{
 
         public void Delete(string id)
         {
-            var objectId = new ObjectId(id);
-            _dbCollection.DeleteOneAsync(Builders<T>.Filter.Eq("_id", objectId));
+            //var objectId = new ObjectId(id);
+            _dbCollection.DeleteOneAsync(Builders<T>.Filter.Eq("_id", id));
 
         }
         public virtual void Update(T obj)
@@ -48,9 +48,9 @@ namespace PhotoBoom.Repositories{
 
         public T Get(string id)
         {
-            var objectId = new ObjectId(id);
+            //var objectId = new ObjectId(id);
 
-            FilterDefinition<T> filter = Builders<T>.Filter.Eq("_id", objectId);
+            FilterDefinition<T> filter = Builders<T>.Filter.Eq("_id", id);
 
             return  _dbCollection.Find(filter).FirstOrDefault();
 

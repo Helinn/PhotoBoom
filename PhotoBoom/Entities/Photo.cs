@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -8,8 +9,12 @@ namespace PhotoBoom.Entities
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public ObjectId Id { get; set; }
+        public string Id { get; set; }
+
         public string FileName { get; set; }
+
         public string PictureDataAsString { get; set; }
+        
+        public ICollection<string> TagList { get; set; }
     }
 }
